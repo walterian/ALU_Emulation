@@ -22,7 +22,7 @@ function varargout = ALU_emulation(varargin)
 
 % Edit the above text to modify the response to help ALU_emulation
 
-% Last Modified by GUIDE v2.5 26-Apr-2017 12:52:41
+% Last Modified by GUIDE v2.5 26-Apr-2017 13:50:13
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -73,16 +73,16 @@ function varargout = ALU_emulation_OutputFcn(hObject, eventdata, handles)
 varargout{1} = handles.output;
 
 
-% --- Executes on button press in pushbutton2.
-function pushbutton2_Callback(hObject, eventdata, handles)
-% hObject    handle to pushbutton2 (see GCBO)
+% --- Executes on button press in buttonExit.
+function buttonExit_Callback(hObject, eventdata, handles)
+% hObject    handle to buttonExit (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
 
-% --- Executes on button press in pushbutton1.
-function pushbutton1_Callback(hObject, eventdata, handles)
-% hObject    handle to pushbutton1 (see GCBO)
+% --- Executes on button press in buttonRun.
+function buttonRun_Callback(hObject, eventdata, handles)
+% hObject    handle to buttonRun (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
