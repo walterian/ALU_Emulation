@@ -91,7 +91,7 @@ opB = str2num(get(handles.operandB,'String'));
 if get(handles.buttonAdd,'Value')
 
 elseif get(handles.buttonSubtract,'Value')
-    
+
 elseif get(handles.buttonAddCarry,'Value')
     
 elseif get(handles.buttonSubBorrow,'Value')
@@ -102,19 +102,7 @@ elseif get(handles.buttonIncrement,'Value')
     
 elseif get(handles.buttonDecrement,'Value')
     
-elseif get(handles.buttonAND,'Value')
-    
-elseif get(handles.buttonOR,'Value')
-    
-elseif get(handles.buttonXOR,'Value')
-    
-elseif get(handles.buttonOnesComplement,'Value')
-    
-elseif get(handles.buttonLeft,'Value')
-    
-elseif get(handles.buttonRight,'Value')
-    
-end
+elseif get(handles.buttonAND,'V
 
 
 
@@ -161,4 +149,3 @@ function operandB_CreateFcn(hObject, eventdata, handles)
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
-
