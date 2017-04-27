@@ -11,18 +11,18 @@ function varargout = ALU_emulation(varargin)
 %
 %      ALU_EMULATION('Property','Value',...) creates a new ALU_EMULATION or raises the
 %      existing singleton*.  Starting from the left, property value pairs are
-%      applied to the GUI before ALU_emulation_OpeningFcn gets called.  An
+%      applied to the APPALU before ALU_emulation_OpeningFcn gets called.  An
 %      unrecognized property name or invalid value makes property application
 %      stop.  All inputs are passed to ALU_emulation_OpeningFcn via varargin.
 %
-%      *See GUI Options on GUIDE's Tools menu.  Choose "GUI allows only one
+%      *See APPALU Options on GUIDE's Tools menu.  Choose "APPALU allows only one
 %      instance to run (singleton)".
 %
 % See also: GUIDE, GUIDATA, GUIHANDLES
 
 % Edit the above text to modify the response to help ALU_emulation
 
-% Last Modified by GUIDE v2.5 26-Apr-2017 13:50:13
+% Last Modified by GUIDE v2.5 27-Apr-2017 16:31:51
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -59,7 +59,7 @@ handles.output = hObject;
 guidata(hObject, handles);
 
 % UIWAIT makes ALU_emulation wait for user response (see UIRESUME)
-% uiwait(handles.figure1);
+% uiwait(handles.appalu);
 
 
 % --- Outputs from this function are returned to the command line.
@@ -78,6 +78,7 @@ function buttonExit_Callback(hObject, eventdata, handles)
 % hObject    handle to buttonExit (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+delete(handles.appalu)
 
 
 % --- Executes on button press in buttonRun.
