@@ -22,7 +22,7 @@ function varargout = ALU_emulation(varargin)
 
 % Edit the above text to modify the response to help ALU_emulation
 
-% Last Modified by GUIDE v2.5 27-Apr-2017 16:31:51
+% Last Modified by GUIDE v2.5 27-Apr-2017 17:24:13
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -86,21 +86,22 @@ function buttonRun_Callback(hObject, eventdata, handles)
 % hObject    handle to buttonRun (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+opA= str2num(get(handles.operandA,'String'));
+set(handles.outputdisplaytext,'String',num2str(opA));
 
 
-
-function edit1_Callback(hObject, eventdata, handles)
-% hObject    handle to edit1 (see GCBO)
+function operandA_Callback(hObject, eventdata, handles)
+% hObject    handle to operandA (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: get(hObject,'String') returns contents of edit1 as text
-%        str2double(get(hObject,'String')) returns contents of edit1 as a double
+% Hints: get(hObject,'String') returns contents of operandA as text
+%        str2double(get(hObject,'String')) returns contents of operandA as a double
 
 
 % --- Executes during object creation, after setting all properties.
-function edit1_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to edit1 (see GCBO)
+function operandA_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to operandA (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -112,18 +113,18 @@ end
 
 
 
-function edit2_Callback(hObject, eventdata, handles)
-% hObject    handle to edit2 (see GCBO)
+function operandB_Callback(hObject, eventdata, handles)
+% hObject    handle to operandB (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: get(hObject,'String') returns contents of edit2 as text
-%        str2double(get(hObject,'String')) returns contents of edit2 as a double
+% Hints: get(hObject,'String') returns contents of operandB as text
+%        str2double(get(hObject,'String')) returns contents of operandB as a double
 
 
 % --- Executes during object creation, after setting all properties.
-function edit2_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to edit2 (see GCBO)
+function operandB_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to operandB (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
