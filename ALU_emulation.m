@@ -87,9 +87,38 @@ function buttonRun_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 opA = str2num(get(handles.operandA,'String'));
-opB = str2num(get(handles.operandB,'String'));
-if get(handles.buttonAdd,'Value')
+cast(opA,'uint8');
+opB = str2num(get(handles.operandB,'String')); %#ok<*ST2NM>
+cast(opB,'uint8');
 
+opA = de2bi(opA,4,'left-msb');
+opB = de2bi(opB,4,'left-msb');
+carryout = 0;
+
+if get(handles.buttonAdd,'Value')
+    sum = opA+opB
+    for counter = 4:-1:1
+        if sum(counter) == 2 && counter == 1
+            sum(counter) = 0;
+            carryout = carryout + 1;
+        elseif sum(counter) == 2
+            sum(counter) = 0;
+            sum(counter-1) = sum(counter-1) + 1;
+        elseif sum(counter) == 3    %deals with
+            sum(counter) = 1;
+            if counter == 1
+                carryout = carryout + 1;
+            else
+                sum(counter-1) = sum(counter-1) + 1;
+            end
+        end
+    end
+    
+    if ~(carryout == 0 || carryout == 1)
+        %%Throw some error
+    end
+    set(handles.outputdisplaytext,'String',num2str(sum));
+    set(handles.outputstatus,'String',num2str(carryout));
 elseif get(handles.buttonSubtract,'Value')
     
 elseif get(handles.buttonAddCarry,'Value')
@@ -161,4 +190,7 @@ function operandB_CreateFcn(hObject, eventdata, handles)
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
+
+
+
 
