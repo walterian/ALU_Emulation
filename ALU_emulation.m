@@ -22,7 +22,7 @@ function varargout = ALU_emulation(varargin)
 
 % Edit the above text to modify the response to help ALU_emulation
 
-% Last Modified by GUIDE v2.5 29-Apr-2017 08:02:43
+% Last Modified by GUIDE v2.5 30-Apr-2017 15:18:19
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -89,38 +89,66 @@ function buttonRun_Callback(hObject, eventdata, handles)
 
 set(handles.twoscomptextbox,'Visible','off');
 
-import matlab.unittest.qualifications.Verifiable;
+if get(handles.operandA,'String') == "" %makes sure that there is some value in each operand
+    set(handles.operandA,'String','0');
+end
+if get(handles.operandB,'String') == ""
+    set(handles.operandB,'String','0');
+end
+if get(handles.carryinput,'String') == ""
+    set(handles.carryinput,'String','0');
+end
 
 opA = str2num(get(handles.operandA,'String'));
 cast(opA,'uint8');
-%if get(handles.operandB,'String') == ''
-%    set(handles.operandB,'String','0');
-%end
 opB = str2num(get(handles.operandB,'String')); %#ok<*ST2NM>
 cast(opB,'uint8');
 
 opA = de2bi(opA,8,'left-msb');
 opB = de2bi(opB,8,'left-msb');
+
+carryin = str2num(get(handles.carryinput,'String'));
+if carryin > 1
+    "error"
+    return;
+end
+carryin = de2bi(carryin,8,'left-msb');
 carryout = 0;
+
 
 if get(handles.buttonAdd,'Value')   %completed
     [sum,carryout] = addnumbers(opA, opB, carryout);
     printoutput(num2str(sum),num2str(carryout),handles)
+    
 elseif get(handles.buttonSubtract,'Value')
     [diff,carryout] = addnumbers(opA, twoscomp(opB), carryout);
     printoutput(num2str(diff),num2str(carryout),handles);
-    if bi2de(opB) > bi2de(opA)
+    if bi2de(opB,8,'left-msb') > bi2de(opA,8,'left-msb')
         set(handles.twoscomptextbox,'Visible','on');
     end
-elseif get(handles.buttonAddCarry,'Value')
     
-elseif get(handles.buttonSubBorrow,'Value')
+elseif get(handles.buttonAddCarry,'Value')
+    [sum,carryout] = addnumbers(carryin, opA, carryout);
+    [sum,carryout] = addnumbers(sum, opB, carryout);
+    printoutput(num2str(sum),num2str(carryout),handles)
+    
+elseif get(handles.buttonSubBorrow,'Value')%carry flag
+    [opBtotal,carryout] = twoscomp(addnumbers(opB, carryin, carryout));
+    [diff,carryout] = addnumbers(opA, opBtotal, carryout);
+    printoutput(num2str(diff),num2str(carryout),handles);
+    
+    if bi2de(opBtotal,8,'left-msb') > bi2de(opA,8,'left-msb')
+        set(handles.twoscomptextbox,'Visible','on');
+    end
     
 elseif get(handles.buttonTwosComplement,'Value')
     [mainout,carryout] = twoscomp(opA);
     printoutput(num2str(mainout),num2str(carryout),handles)
-elseif get(handles.buttonIncrement,'Value')
     
+elseif get(handles.buttonIncrement,'Value')
+    bione = de2bi(1,8,'left-msb');
+    [sum,carryout] = addnumbers(opA, bione, carryout);
+    printoutput(num2str(sum),num2str(carryout),handles);
 elseif get(handles.buttonDecrement,'Value')
     
 elseif get(handles.buttonAND,'Value')
@@ -300,26 +328,26 @@ set(handles.operandB,'Enable','off');
 set(handles.operandB,'String','0');
 
 
-% --- Executes on button press in buttonincrementA.
-function buttonincrementA_Callback(hObject, eventdata, handles)
-% hObject    handle to buttonincrementA (see GCBO)
+% --- Executes on button press in buttonIncrement.
+function buttonIncrement_Callback(hObject, eventdata, handles)
+% hObject    handle to buttonIncrement (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hint: get(hObject,'Value') returns toggle state of buttonincrementA
+% Hint: get(hObject,'Value') returns toggle state of buttonIncrement
 set(handles.carryinput,'Enable','off');
 set(handles.carryinput,'String','0');
 set(handles.operandB,'Enable','off');
 set(handles.operandB,'String','0');
 
 
-% --- Executes on button press in buttonDecrementA.
-function buttonDecrementA_Callback(hObject, eventdata, handles)
-% hObject    handle to buttonDecrementA (see GCBO)
+% --- Executes on button press in buttonDecrement.
+function buttonDecrement_Callback(hObject, eventdata, handles)
+% hObject    handle to buttonDecrement (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hint: get(hObject,'Value') returns toggle state of buttonDecrementA
+% Hint: get(hObject,'Value') returns toggle state of buttonDecrement
 set(handles.carryinput,'Enable','off');
 set(handles.carryinput,'String','0');
 set(handles.operandB,'Enable','off');
