@@ -197,16 +197,7 @@ elseif get(handles.buttonRight,'Value')
         %no check here because even if there is a bit in the rightmost
         %location, it just dissapears
         
-        if counter == 1
-            %need this here because if we don't add it, when opA(counter-1)
-            %is at counter = 1, it will try to get the value of opA(0),
-            %which doesnt exist and will throw and error
-            
-            opA(counter) = 0;   %sets the leftmost bit equal to zero
-            break   %exits the for loop
-        end
-        
-        opA(counter) = opA(counter-1);  %'shifts' each bit to the right
+        opA(counter) = opA(counter+1);  %'shifts' each bit to the left
     end
     
     printoutput(num2str(opA),num2str(carryout),handles);
