@@ -107,6 +107,9 @@ cast(opB,'uint8');
 opA = de2bi(opA,8,'left-msb');
 opB = de2bi(opB,8,'left-msb');
 
+set(handles.textBinaryA,'String',num2str(opA));
+set(handles.textBinaryB,'String',num2str(opB));
+
 carryin = str2num(get(handles.carryinput,'String'));
 if carryin > 1
     "error"
